@@ -4,7 +4,14 @@
     font-family: 'Founders Grotesk';
     font-weight: bold;
     font-style: normal;
-    background: #1e1e1e
+}
+
+.chart {
+    size: 10%;
+}
+
+body {
+    background: #111111
 }
 
 html {
@@ -20,10 +27,6 @@ h1 {
 
 .NHS {
     color: coral;
-}
-
-.chart {
-    size: 10%;
 }
 
 @font-face {

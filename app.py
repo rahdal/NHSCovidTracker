@@ -11,8 +11,9 @@ app.static_folder = 'static'
 
 @app.route("/")
 def index():
+
     df = bovid.df
-    fig = px.bar(df, x='Date', y='Cases')
+    fig = px.bar(df, x='Date', y='Cases', template='plotly_dark')
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     return render_template('index.html', graphJSON = graphJSON)
