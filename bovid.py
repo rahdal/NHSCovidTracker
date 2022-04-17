@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[5]:
+# In[4]:
 
 
 import pandas as pd
@@ -9,16 +9,16 @@ import matplotlib.pyplot as plt
 import os
 
 
-# In[6]:
+# In[24]:
 
 
-ones = {'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12, 'thirteen': 13, 
+ones = {'zero': 0, '': 1, 'a' : 1, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12, 'thirteen': 13, 
         'fourteen': 14, 'fifteen': 15, 'sixteen': 16, 'seventeen': 17, 'eighteen': 18, 'nineteen': 19}
 
 tens = {'twenty': 2, 'thirty': 3, 'forty': 4, 'fifty': 5, 'sixty': 6, 'seventy': 7, 'eighty': 8, 'ninety': 9}
 
 
-# In[18]:
+# In[25]:
 
 
 dates = []
@@ -32,7 +32,7 @@ intNumberofCases = 0
 for file in sorted(os.listdir(directory)):
      filename = os.fsdecode(file)
      
-     date = filename.replace('-22 NHS COVID Communication.txt', '').strip().replace('-','/')
+     date = filename.replace('-22 NHS COVID Communication.txt', '').replace('-21 NHS COVID Communication.txt', '').strip().replace('-','/')
      dates.append(date)
      
      fileLocation = location + "/" + filename
@@ -41,7 +41,8 @@ for file in sorted(os.listdir(directory)):
         lines = f.read()
     
         endofCaseNumber = lines.find("confirmed")
-        numberofCases = lines[228:endofCaseNumber]
+        startofCaseNumber = lines.find("ONLY") + 4
+        numberofCases = lines[startofCaseNumber:endofCaseNumber]
 
         if(numberofCases.find('(') != -1):
             numberStart = numberofCases.find('(')
@@ -68,7 +69,7 @@ for file in sorted(os.listdir(directory)):
 dataDict = dict(zip(dates,casesList))
 
 
-# In[19]:
+# In[26]:
 
 
 #function for key
@@ -85,7 +86,7 @@ final_dict = dict(sorted_dates)
 
 
 
-# In[20]:
+# In[27]:
 
 
 df = pd.DataFrame(final_dict.items(), columns=['Date', 'Cases'])
